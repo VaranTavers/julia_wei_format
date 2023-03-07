@@ -1,0 +1,6 @@
+name = "WeightedEdgeListFormat"
+uuid = "1ad517f0-379a-4563-bead-04a8bca42320"
+authors = ["Tasnádi Zoltán <tasnadi98@gmail.com>"]
+version = "0.1.0"
+
+[deps]
