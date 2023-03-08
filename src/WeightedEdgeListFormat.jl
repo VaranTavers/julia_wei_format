@@ -6,6 +6,8 @@ module WeightedEdgeListFormat
   using SimpleWeightedGraphs
 
   export WELFormat
+  export loadgraph
+  export loadgraphs
 
   struct WELFormat <: Graphs.AbstractGraphFormat
     delim
