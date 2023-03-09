@@ -8,20 +8,24 @@ module WeightedEdgeListFormat
   export WELFormat
   export loadgraph
   export loadgraphs
+  export read_edge_list_weighted
 
-  struct WELFormat <: Graphs.AbstractGraphFormat
+  import Graphs:
+    AbstractGraphFormat, loadgraph, loadgraphs, savegraph
+
+  struct WELFormat <: AbstractGraphFormat
     delim
     WELFormat() = new(",")
     WELFormat(delim) = new(delim)
   end
 
-  function Graphs.loadgraph(io::IO, gname::String, f::WELFormat)
+  function loadgraph(io::IO, gname::String, f::WELFormat)
     g, _ = read_edge_list_weighted(io; delim=f.delim)
 
     g
   end
 
-  Graphs.loadgraphs(io::IO, f::WELFormat) = loadgraph(io, "...", f)
+  loadgraphs(io::IO, f::WELFormat) = loadgraph(io, "...", f)
 
   function read_edge_list_weighted(filename; delim=" ")
     csv = CSV.read(filename, DataFrame; header=false, delim=delim)
