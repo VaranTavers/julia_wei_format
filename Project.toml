@@ -12,8 +12,8 @@ SimpleWeightedGraphs = "47aef6b3-ad0c-573a-a1e2-d07658019622"
 
 [compat]
 julia = "1"
-CSV="~1"
-DataFrames="~1"
-GraphIO="~0"
-Graphs="~1"
-SimpleWeightedGraphs="~1"
+CSV = "~0.10"
+DataFrames = "~1"
+GraphIO = "~0.6"
+Graphs = "~1"
+SimpleWeightedGraphs = "~1"
