@@ -16,7 +16,7 @@ import Graphs: AbstractGraphFormat, loadgraph, loadgraphs, savegraph
 
 struct WELFormat <: AbstractGraphFormat
     delim::Any
-    WELFormat() = new(",")
+    WELFormat() = new(',')
     WELFormat(delim) = new(delim)
 end
 
@@ -28,13 +28,13 @@ end
 
 loadgraphs(io::IO, f::WELFormat) = loadgraph(io, "...", f)
 
-function read_edge_list_weighted(filename; delim = " ")
-    csv = CSV.read(filename, DataFrame; header = false, delim = delim)
+function read_edge_list_weighted(filename; delim = ' ')
+    csv = readdlm(filename, delim, Float64, '\n')
     if minimum(csv[:, 1]) == 0 || minimum(csv[:, 2]) == 0
         csv .+= 1
     end
-    labels = unique(sort(vcat(csv[:, 1], csv[:, 2])))
-    g = SimpleWeightedGraph(csv[:, 1], csv[:, 2], csv[:, 3]; combine = max)
+    labels = unique(sort(vcat(Int.(csv[:, 1]), Int.(csv[:, 2]))))
+    g = SimpleWeightedGraph(Int.(csv[:, 1]), Int.(csv[:, 2]), csv[:, 3]; combine = max)
 
     g, labels
 end
@@ -44,7 +44,11 @@ function greet_123()
 end
 
 function savegraph(io::IO, g::AbstractGraph, gname::String, format::WELFormat)
-    writedlm(io, ([src(e), dst(e), e.weight] for e in Graphs.edges(g)), format.delim)
+    writedlm(
+        io,
+        ([Int(src(e)), Int(dst(e)), e.weight] for e in Graphs.edges(g)),
+        format.delim,
+    )
 end
 
 end # module WeightedEdgeListFormat
