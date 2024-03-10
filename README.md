@@ -5,6 +5,10 @@ Doesn't support:
 
   * Loading multiple graphs from the same file
 
-  * Writing graphs in this format
-
   * Assigning names to graphs
+
+## v. 0.2.0
+
+Adds support for writing graphs.
+
+Changes from CSV.jl to DelimitedFiles.jl
