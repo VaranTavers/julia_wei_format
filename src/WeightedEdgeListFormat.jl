@@ -1,6 +1,5 @@
 module WeightedEdgeListFormat
 using Graphs
-using CSV
 using DataFrames
 using GraphIO
 using SimpleWeightedGraphs
@@ -15,7 +14,7 @@ export read_edge_list_weighted
 import Graphs: AbstractGraphFormat, loadgraph, loadgraphs, savegraph
 
 struct WELFormat <: AbstractGraphFormat
-    delim::Any
+    delim::AbstractChar
     WELFormat() = new(',')
     WELFormat(delim) = new(delim)
 end
